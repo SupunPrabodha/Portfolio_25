@@ -2,7 +2,7 @@
 
 A visually stunning and interactive 3D portfolio website built with React.js, Three.js, and other modern web technologies. This project showcases my skills, projects, and experiences through engaging 3D models and animations, providing an immersive experience for visitors. The portfolio features custom 3D models integrated into the design to enhance the visual appeal and interactivity.
 
-Live Demo: supunprabodhaportfolio.netlify.app
+Live Demo: https://supunprabodhaportfolio.netlify.app/
 
 This project was developed following a YouTube tutorial by JavaScript Mastery, with the original repository available at adrianhajdin/3d-portfolio.
 
