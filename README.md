@@ -44,8 +44,8 @@ Follow these steps to set up the project locally on your machine.
 1. **Clone the Repository**:
 
    ```bash
-   git clone https://github.com/<your-username>/<your-repo-name>.git
-   cd <your-repo-name>
+   git clone https://github.com/SupunPrabodha/Portfolio_25.git
+   cd Portfolio_25
    ```
 
 2. **Install Dependencies**:
@@ -57,9 +57,9 @@ Follow these steps to set up the project locally on your machine.
 3. **Set Up Environment Variables**: Create a `.env` file in the root of your project and add your EmailJS credentials:
 
    ```bash
-   VITE_APP_EMAILJS_SERVICE_ID=your_service_id
-   VITE_APP_EMAILJS_TEMPLATE_ID=your_template_id
-   VITE_APP_EMAILJS_PUBLIC_KEY=your_public_key
+   VITE_APP_EMAILJS_SERVICE_ID=service_id
+   VITE_APP_EMAILJS_TEMPLATE_ID=template_id
+   VITE_APP_EMAILJS_PUBLIC_KEY=public_key
    ```
 
    Replace the placeholder values with your actual EmailJS credentials, obtainable from the EmailJS website.
@@ -130,7 +130,7 @@ This project is licensed under the MIT License. See the LICENSE file for details
 
 Reach out via the contact form on the portfolio website or connect with me on:
 
-- GitHub: Your GitHub Username
-- Email: \[Your Email Address\]
+- GitHub: https://github.com/SupunPrabodha
+- Email: supunprabodha0915@gmail.com
 
-LinkedIn: Your LinkedIn Profile
+LinkedIn: www.linkedin.com/in/supun-prabodha-liyanage
