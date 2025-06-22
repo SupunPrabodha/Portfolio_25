@@ -6,6 +6,11 @@ Live Demo: https://supunprabodhaportfolio.netlify.app/
 
 This project was developed following a YouTube tutorial by JavaScript Mastery, with the original repository available at adrianhajdin/3d-portfolio.
 
+![image](https://github.com/user-attachments/assets/f4249232-900e-4ef2-89ed-643a78dc6059)
+![image](https://github.com/user-attachments/assets/1c2867fb-3b1c-4d85-9de0-53aa7d1e4d86)
+![image](https://github.com/user-attachments/assets/5a282834-c1b6-4e1d-a4a5-345f2028b7d9)
+
+
 ## Features
 
 - **Interactive 3D Models**: Custom 3D models integrated using Three.js and React Three Fiber for a captivating hero section and interactive elements.
