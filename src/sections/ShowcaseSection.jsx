@@ -1,9 +1,4 @@
-import React, { useRef } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { useGSAP } from '@gsap/react';
-
-gsap.registerPlugin(ScrollTrigger);
+import React, { useRef, useEffect } from 'react';
 
 const ShowcaseSection = () => {
   const sectionRef = useRef(null);
@@ -13,15 +8,7 @@ const ShowcaseSection = () => {
   const project4Ref = useRef(null);
   const project5Ref = useRef(null);
 
-  useGSAP(() => {
-    // Animate the section fade-in
-    gsap.fromTo(
-      sectionRef.current,
-      { opacity: 0, y: 50 },
-      { opacity: 1, y: 0, duration: 1.5, ease: 'power2.out' }
-    );
-
-    // Animate each project card with a smooth vertical slide-in
+  useEffect(() => {
     const projects = [
       project1Ref.current,
       project2Ref.current,
@@ -29,41 +16,60 @@ const ShowcaseSection = () => {
       project4Ref.current,
       project5Ref.current,
     ];
-    projects.forEach((card, index) => {
-      gsap.fromTo(
-        card,
-        { y: 100, opacity: 0 },
+
+    // Fallback to ensure content displays if IntersectionObserver fails
+    const ensureVisibility = () => {
+      projects.forEach((project) => {
+        if (project) {
+          project.style.opacity = '1';
+        }
+      });
+    };
+
+    // Set timeout as fallback to ensure display after 1 second
+    const timeoutId = setTimeout(ensureVisibility, 1000);
+
+    // IntersectionObserver for lazy loading enhancement
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.style.opacity = '1';
+              observer.unobserve(entry.target);
+            }
+          });
+        },
         {
-          y: 0,
-          opacity: 1,
-          duration: 1.2,
-          delay: 0.4 * (index + 1),
-          ease: 'power2.out',
-          scrollTrigger: {
-            trigger: card,
-            start: 'top bottom-=100',
-          },
+          root: null,
+          rootMargin: '0px',
+          threshold: 0.1,
         }
       );
 
-      // Add mouse-move glow effect similar to GlowCard
-      const handleMouseMove = (e) => {
-        const rect = card.getBoundingClientRect();
-        const mouseX = e.clientX - rect.left - rect.width / 2;
-        const mouseY = e.clientY - rect.top - rect.height / 2;
-        let angle = Math.atan2(mouseY, mouseX) * (180 / Math.PI);
-        angle = (angle + 360) % 360;
-        card.style.setProperty('--start', angle + 60);
-      };
-
-      card.addEventListener('mousemove', handleMouseMove);
-      card.addEventListener('mouseleave', () => {
-        card.style.setProperty('--start', '0'); // Reset glow on mouse leave
+      projects.forEach((project) => {
+        if (project) {
+          project.style.opacity = '0'; // Initial state for observed elements
+          observer.observe(project);
+        }
       });
-    });
+
+      return () => {
+        projects.forEach((project) => {
+          if (project) {
+            observer.unobserve(project);
+          }
+        });
+      };
+    } else {
+      // Fallback for browsers without IntersectionObserver
+      ensureVisibility();
+    }
+
+    return () => clearTimeout(timeoutId);
   }, []);
 
-  // Define social links for each project (replace with actual URLs)
+  // Define social links for each project
   const projectLinks = [
     {
       github: 'https://github.com/SupunPrabodha/FitFlow.lk.git',
@@ -109,6 +115,7 @@ const ShowcaseSection = () => {
                 src="/images/project1.png"
                 alt="FitFlow"
                 className="w-full h-48 object-cover transition-transform duration-300 hover:scale-110"
+                loading="lazy"
               />
             </div>
             <div className="text-content mt-4 relative z-10">
@@ -152,6 +159,7 @@ const ShowcaseSection = () => {
                 src="/images/project2.png"
                 alt="SeatReserve"
                 className="w-full h-48 object-cover transition-transform duration-300 hover:scale-110"
+                loading="lazy"
               />
             </div>
             <h2 className="text-2xl font-semibold text-white mt-4">
@@ -193,6 +201,7 @@ const ShowcaseSection = () => {
                 src="/images/project3.png"
                 alt="WealthWave"
                 className="w-full h-48 object-cover transition-transform duration-300 hover:scale-110"
+                loading="lazy"
               />
             </div>
             <h2 className="text-2xl font-semibold text-white mt-4">
@@ -234,6 +243,7 @@ const ShowcaseSection = () => {
                 src="/images/VOTE SPHERE.png"
                 alt="VOTE SPHERE"
                 className="w-full h-48 object-cover transition-transform duration-300 hover:scale-110"
+                loading="lazy"
               />
             </div>
             <h2 className="text-2xl font-semibold text-white mt-4">
@@ -275,6 +285,7 @@ const ShowcaseSection = () => {
                 src="/images/SFitMarket.png"
                 alt="SFitMarket"
                 className="w-full h-48 object-cover transition-transform duration-300 hover:scale-110"
+                loading="lazy"
               />
             </div>
             <h2 className="text-2xl font-semibold text-white mt-4">
